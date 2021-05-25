@@ -1,0 +1,17 @@
+user :-
+    POST:-
+        
+        login
+        signup
+        logout
+
+    Update :-
+
+        change password, username
+        profile picture 
+
+    Delete :-
+
+        account
+
+

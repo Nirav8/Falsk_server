@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <title>login page</title>
+
+    <body>
+    <script src="/static//login/login.js"></script>
+    <link rel="stylesheet" href="/static/login/login.css">  
+
+        <div class="headercontainer">
+            <div class="hlilnk">
+                <a href="http://localhost:5000/login/user" class="h-text"> Login </a>
+                <a href="http://localhost:5000/signup/user" class="h-text"> Singin </a>
+            </div>
+            <div> Social Connects </div>
+        </div>
+
+        <div class="image">
+            <img src="/static/login/images/tree.png" class="image">
+        </div>
+
+        <div class="form-container">
+            <h1> Login </h1>
+            <hr noshade>
+            <div class="input">
+            <input type='text' placeholder="Username / Email" class="field" id='username'>
+            <input type='password' placeholder="Password" class='field' id='password'>
+            <br>
+            <input type='button' class='button' value='Login' onclick="login()">
+            </div>
+        </div>
+    </body>
+</html>
