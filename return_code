@@ -1,3 +1,38 @@
-301 --> usernotExist
-300 --> userexist
+200 --> okk
+501 --> under construction
+404 --> not available
+
+
+Login :-
+    http://localhost:5000/login/user  POST
+    json
+    {
+        "username" : email, / username
+        "password" : 1234567
+    }
+    return
+    {
+        sucsees :- 200
+        session cookie
+
+        450 --> usernotexist
+        451 --> password is incorrect
+    }
+
+Signup :-
+    http://localhost:5000/signup/user
+    json
+    {
+        "email" : "niravmo3radiya@gmail.com",
+        "password" : "1234567",
+        "username" : "Mr.NA"
+    }
+    return{
+        201 -> crated
+
+        250 -> email alredy in used
+        251 -> email is exist and verified
+        252 -> go and verify email
+    }
+
 

@@ -20,7 +20,7 @@ def Login():
             _user = _isuser(isemail = _isemail, username = _username)
 
             if _user == None:
-                return jsonify("user not exist"), 301
+                return jsonify("user not exist"), 450
 
             else:
                 __password = _json['password']
@@ -28,11 +28,10 @@ def Login():
 
                 if _ans == True:
                     session['_username'] = _username
-                    print(session)
-                    return jsonify({"message" : "login sucsess fully"}), 302
+                    return jsonify({"message" : "login sucsess fully"}), 201
 
                 else:
-                    return jsonify({'result': 'password is not correct'}), 303
+                    return jsonify({'result': 'password is not correct'}), 451
     except Exception as ex:
         print(ex, "**************************")
 

@@ -25,5 +25,4 @@ def compare_hash(old,new):
     else:
         return False
 
-def session_auth():
-    request.
+

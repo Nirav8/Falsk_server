@@ -27,17 +27,17 @@ def create_user():
                 _user = _isuser(email = _email)
 
                 if _user == None and _tempuser !=None:
-                    return jsonify({'result' : "email allredy in used, please verify your email"})
+                    return jsonify({'result' : "email allredy in used, please verify your email"}),250
                 
                 elif _user != None and _tempuser == None:
                     return jsonify({
                         "message" : "Verify your email !!!!"
-                    }), 201
+                    }), 252
 
                 elif _tempuser == None and _user != None:
                     return jsonify({
                         "message" : "you are allredy verifid"
-                    }), 200
+                    }), 251
 
                 elif _user == None and _tempuser == None:
                     _username = _json['username']
@@ -54,8 +54,8 @@ def create_user():
                     # emailsending(_email, _name, "http://localhost:9090/verify/{}?token={}".format(_email, _token))    
                     return jsonify({
                         'reult: ': "User Created",
-                        'id' : inserted
-                    })
+                        'id' : str(inserted)
+                    }), 201
         except Exception as ex:
             print("***************************************************")
             print(ex)
@@ -63,12 +63,13 @@ def create_user():
 
 @signup.route("/verify/<userid>", methods = ['GET' , 'POST'])
 #TODO:make decorator at hear
+#TODO :-crate gmail app for sending email and make a new temolate
 def verify(userid):
     if request.method == 'GET':
-        return jsonify("we have nothing yet,,,"),204
+        return jsonify("we have nothing yet,,,"), 200
     elif request.method == 'POST':
         verified = _verifyuser(userid=userid)
         print(verified)
-        return jsonify('verified')
+        return jsonify('verified'), 200
        
 
