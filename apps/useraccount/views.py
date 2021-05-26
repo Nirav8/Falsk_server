@@ -47,5 +47,7 @@ def changeusername():
 
     if _changeusername(_username, _newusername):
         return jsonify(), 200
+        
     else:
         return jsonify(), 304
+
