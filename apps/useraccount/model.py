@@ -14,7 +14,14 @@ def _isuser(email):
 
 def _changepassword(new_pass , email):
     try:
-        users.update_one({"email" : email} , {'$set' : {{"password" : convert_hash(new_pass)}} })
+        users.update_one({"email" : email} , {'$set' : {"password" : new_pass}})
+        return 1
+    except Exception as ex:
+        return ex
+
+def _changeusername(email , newusername):
+    try:
+        users.update_one({'email' : email} , {'$set' : {'username' : newusername}})
         return 1
     except Exception as ex:
         return ex

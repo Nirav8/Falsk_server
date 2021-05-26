@@ -18,29 +18,32 @@ def create_user():
             _json = request.json
             _email = _json['email']
             _isemail = check_email(_email)
+            _username = _json['username']
 
             if _isemail == False:
                 return jsonify('not valid email')
 
             else:
-                _tempuser = _istempuser(email = _email)
-                _user = _isuser(email = _email)
+                _tempuser = _istempuser(email = _email, username = _username)
+                _user = _isuser(email = _email, username = _username)
 
-                if _user == None and _tempuser !=None:
+                print(_tempuser, _user , "********************************8")
+
+                if _user == 0 and _tempuser == 1:
                     return jsonify({'result' : "email allredy in used, please verify your email"}),250
                 
-                elif _user != None and _tempuser == None:
-                    return jsonify({
-                        "message" : "Verify your email !!!!"
-                    }), 252
 
-                elif _tempuser == None and _user != None:
+                elif _user == 1 and _tempuser == 0:
                     return jsonify({
                         "message" : "you are allredy verifid"
                     }), 251
 
-                elif _user == None and _tempuser == None:
-                    _username = _json['username']
+                elif _user == 1 and _tempuser == 1:
+                    return jsonify({
+                        "message" : "username or email is allredy in used"
+                    }), 252
+
+                elif _user == 0 and _tempuser == 0:
                     _password = _json['password']
                     _password = convert_hash(_password)
                     _userdata = {

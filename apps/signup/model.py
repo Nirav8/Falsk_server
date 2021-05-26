@@ -4,13 +4,21 @@ from connection.mongoconnection import mongo
 temp_user = mongo.Login.temp_users
 users = mongo.Login.users
 
-def _isuser(email):
-    user = users.find_one({'email' : email})
-    return user
+def _isuser(email , username):
+    email = users.find_one({'email' : email})
+    usename = users.find_one({'username' : username})
+    if email != None or usename != None:
+        return 1
+    else:
+        return 0
 
-def _istempuser(email):
-    tempuser = temp_user.find_one({'email' : email})
-    return tempuser
+def _istempuser(email, username):
+    tempemail = temp_user.find_one({'email' : email})
+    tusername = temp_user.find_one({'username' : username})
+    if tempemail != None or tusername != None:
+        return 1
+    else:
+        return 0
 
 def _insert(data):
     inserted = temp_user.insert_one(data)
