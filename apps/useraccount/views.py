@@ -25,7 +25,6 @@ def changepassword():
     elif request.method == 'POST':
         _json = request.json
         _email = _json['email']
-        
         _user = _isuser(_email)
         
         if _user:
