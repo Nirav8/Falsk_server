@@ -35,21 +35,29 @@ Signup :-
     }
 
 account setting :-
+
+change password :-
     http://localhost:5000/account/changepassword
     {
         "email" : "namoradiya99@gmail.com",
         "password" : "1234567",
         "new_password" : "123456"
     }
-    {
+    return{
         200 --> okk
         304 --> not modify
         451 --> password is incorrect
     }
 
 change username :-
-    http://localhost:5000/account/changepassword
+    http://localhost:5000/account/changeusername
     {
-        
+        "email":"namoradiya99@gmail.com",
+        "new_username" : "Nirav Moradiya99"
+    }
+
+    return{
+        204 --> updated
+        351 --> usrname not available
     }
 

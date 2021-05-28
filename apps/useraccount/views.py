@@ -5,7 +5,7 @@ from flask import Blueprint
 from flask.globals import request, session
 from flask.json import jsonify
 
-from .model import _isuser, _changepassword, _changeusername
+from .model import _isuser, _changepassword, _changeusername, _isusernameavailabe
 
 useraccount = Blueprint('useraccount' , __name__)
 
@@ -40,13 +40,17 @@ def changepassword():
 
 @useraccount.route("/changeusername", methods=['GET' , 'POST'])
 def changeusername():
-    _json = request.json
-    _username = _json['email']
-    _newusername = _json['newusername']
-
-    if _changeusername(_username, _newusername):
-        return jsonify(), 200
+    if request.method == 'POST':
+        _json = request.json
+        _username = _json['email']
+        _newusername = _json['new_username']
         
-    else:
-        return jsonify(), 304
+        _isavailable = _isusernameavailabe(_newusername)
+
+        if _isavailable:
+            if _changeusername(_username, _newusername):
+                return jsonify(), 204
+
+        else:
+            return jsonify(),  401
 
