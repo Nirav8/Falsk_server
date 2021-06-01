@@ -65,8 +65,10 @@ def create_user():
             print("***************************************************")
 
 @signup.route("/verify/<userid>", methods = ['GET' , 'POST'])
+
 #TODO:make decorator at hear
 #TODO :-crate gmail app for sending email and make a new temolate
+
 def verify(userid):
     if request.method == 'GET':
         return jsonify("we have nothing yet,,,"), 200

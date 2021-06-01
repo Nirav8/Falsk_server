@@ -1,7 +1,9 @@
 import re
 import hashlib
-from flask import session, request
+from flask import session
+from functools import wraps
 
+from flask.json import jsonify
 
 regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
 
@@ -25,4 +27,12 @@ def compare_hash(old,new):
     else:
         return False
 
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if '_username' in session:
+            return f(*args, **kwargs)
+        else:
+            return jsonify({"message": "Login Requierd"}), 401
+    return wrap
 

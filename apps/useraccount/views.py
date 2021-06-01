@@ -1,6 +1,5 @@
-from flask import json
 from pymongo.collection import ReturnDocument
-from apps import compare_hash, convert_hash
+from apps import compare_hash, convert_hash, login_required
 from flask import Blueprint
 from flask.globals import request, session
 from flask.json import jsonify
@@ -11,14 +10,15 @@ useraccount = Blueprint('useraccount' , __name__)
 
 @useraccount.route("/logout", methods = ['GET', 'POST'])
 def logout():
-    print(session)
-    session.pop('_username', None)
-    print(session)
+    session.clear()
     return jsonify(),301
+    
 
 #TODO create an decorator and make is secure
 #TODO maek template for changing password
+
 @useraccount.route("/changepassword", methods=['GET', 'POST'])
+@login_required
 def changepassword():
     if request.method == 'GET':
         return jsonify('comming soon'), 501
@@ -39,8 +39,12 @@ def changepassword():
                 return jsonify({'message' : 'password ios incorret'}), 451
 
 @useraccount.route("/changeusername", methods=['GET' , 'POST'])
+@login_required
 def changeusername():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return jsonify(), 501
+
+    elif request.method == 'POST':
         _json = request.json
         _username = _json['email']
         _newusername = _json['new_username']
@@ -53,4 +57,3 @@ def changeusername():
 
         else:
             return jsonify(),  401
-

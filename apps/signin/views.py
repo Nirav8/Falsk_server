@@ -34,4 +34,3 @@ def Login():
                     return jsonify({'result': 'password is not correct'}), 451
     except Exception as ex:
         print(ex, "**************************")
-

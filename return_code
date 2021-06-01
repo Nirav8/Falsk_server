@@ -18,6 +18,11 @@ Login :-
         451 --> password is incorrect
     }
 
+
+Logout :-
+    http://localhost:5000/login/user  POST
+
+
 Signup :-
     http://localhost:5000/signup/user
     json
