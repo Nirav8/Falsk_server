@@ -34,4 +34,4 @@ session = Session()
 
 if __name__ =='__main__':
     session.init_app(app)
-    app.run(debug=True)
+    app.run(debug=True,threaded= True)
